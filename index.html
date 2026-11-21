@@ -172,71 +172,115 @@ function makeTabs(){
  });
 }
 
+// PHOTO CACHE: पहले सेव की हुई फोटो इस्तेमाल होगी
 async function findPhoto(searchTerm){
+ const cacheKey="vvk_photo_"+searchTerm;
+
+ try{
+  const saved=localStorage.getItem(cacheKey);
+  if(saved){
+   const cached=JSON.parse(saved);
+   if(cached.src && cached.page)return cached;
+  }
+ }catch(e){}
+
  const params=new URLSearchParams({
   action:"query",
   generator:"search",
   gsrsearch:"filetype:bitmap "+searchTerm,
   gsrnamespace:"6",
-  gsrlimit:"8",
+  gsrlimit:"5",
   prop:"imageinfo",
   iiprop:"url",
-  iiurlwidth:"900",
+  iiurlwidth:"480",
   format:"json",
   origin:"*"
  });
- const response=await fetch("https://commons.wikimedia.org/w/api.php?"+params);
+
+ const response=await fetch(
+  "https://commons.wikimedia.org/w/api.php?"+params
+ );
+
  if(!response.ok)throw new Error("Image search failed");
+
  const data=await response.json();
  const pages=Object.values(data.query?.pages||{});
+
  for(const p of pages){
   const info=p.imageinfo?.[0];
+
   if(info?.thumburl && !/\.svg(\?|$)/i.test(info.thumburl)){
-   return {src:info.thumburl,page:info.descriptionurl,title:p.title};
+   const result={
+    src:info.thumburl,
+    page:info.descriptionurl,
+    title:p.title
+   };
+
+   try{
+    localStorage.setItem(cacheKey,JSON.stringify(result));
+   }catch(e){}
+
+   return result;
   }
  }
+
  throw new Error("No photo found");
 }
 
 async function showVehicle(){
  const v=filtered[current];
  if(!v)return;
- photo.style.display="none";
- photo.removeAttribute("src");
+
  loading.style.display="block";
- loading.textContent="तस्वीर खोजी जा रही है...";
+ loading.textContent="तस्वीर लोड हो रही है...";
  creditEl.textContent="";
+
  nameEl.textContent=v[0];
  hindiEl.textContent=v[1];
  descEl.textContent=v[2];
+
  document.getElementById("counter").textContent=
   "Vehicle "+(current+1)+" / "+filtered.length;
+
  document.getElementById("learned").textContent=learnedSet.size;
  document.getElementById("total").textContent=vehicles.length;
 
  try{
   const result=await findPhoto(v[4]);
+
   if(filtered[current]!==v)return;
-  photo.onload=()=>{
-   loading.style.display="none";
+
+  const newImage=new Image();
+
+  newImage.onload=()=>{
+   if(filtered[current]!==v)return;
+
+   photo.src=result.src;
    photo.style.display="block";
+   photo.style.objectFit="contain";
+   loading.style.display="none";
   };
-  photo.onerror=()=>{
-   loading.style.display="block";
-   loading.textContent="तस्वीर लोड नहीं हुई। फिर कोशिश करें।";
-   photo.style.display="none";
+
+  newImage.onerror=()=>{
+   if(filtered[current]!==v)return;
+   loading.textContent="फोटो लोड नहीं हुई। Retry करें।";
   };
-  photo.src=result.src;
-  creditEl.innerHTML="";
+
+  newImage.src=result.src;
+
   const link=document.createElement("a");
   link.href=result.page;
   link.target="_blank";
   link.rel="noopener";
   link.textContent="Photo source: Wikimedia Commons";
   creditEl.appendChild(link);
+
  }catch(e){
+  if(filtered[current]!==v)return;
+
   loading.style.display="block";
-  loading.textContent="तस्वीर अभी नहीं मिली। Retry दबाएँ।";
+  loading.textContent="फोटो नहीं मिली। फिर कोशिश करें।";
+
   const retry=document.createElement("button");
   retry.className="btn";
   retry.textContent="Retry Photo";
@@ -268,7 +312,6 @@ function speak(text,lang){
  speechSynthesis.speak(msg);
 }
 function askMe(){
- const v=filtered[current];
  speak("Hello kids! What is this? बच्चों, बताओ यह क्या है?","hi-IN");
 }
 function tellMe(){
@@ -298,14 +341,17 @@ function newQuiz(){
  quizAnswer=correct;
  document.getElementById("quizQuestion").textContent=
   "इस वाहन का सही English नाम चुनिए: "+correct[1];
+
  const options=[correct];
  while(options.length<4){
   const x=vehicles[Math.floor(Math.random()*vehicles.length)];
   if(!options.includes(x))options.push(x);
  }
  options.sort(()=>Math.random()-0.5);
+
  const box=document.getElementById("quizOptions");
  box.innerHTML="";
+
  options.forEach(x=>{
   const b=document.createElement("button");
   b.className="option";
