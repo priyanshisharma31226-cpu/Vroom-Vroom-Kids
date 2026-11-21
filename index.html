@@ -1,505 +1,333 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#5548db">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0877c9">
 <title>Vroom Vroom Kids</title>
-
 <style>
 *{box-sizing:border-box}
-body{
- margin:0;background:#f4f5ff;color:#252447;
- font-family:Arial,sans-serif;
-}
-button{font-family:inherit;cursor:pointer}
-header{
- background:linear-gradient(120deg,#5548db,#a17cf5);
- color:white;padding:22px 17px;border-radius:0 0 28px 28px;
-}
-.head{max-width:1000px;margin:auto;display:flex;
- justify-content:space-between;align-items:center}
-.logo{font-size:35px}
-header h1{margin:0;font-size:26px}
-header p{margin:6px 0 0;font-size:13px}
-.sound{
- background:white;color:#5548db;border:0;
- border-radius:30px;padding:11px;font-weight:bold;
-}
-.container{max-width:950px;margin:auto;padding:16px}
-.welcome{
- background:linear-gradient(110deg,#ffdf85,#ffb7c9);
- border-radius:22px;padding:19px;margin-bottom:15px;
-}
-.welcome h2{margin:0 0 6px;font-size:23px}
-.welcome p{margin:0;font-size:14px}
-.categories{
- display:flex;gap:8px;overflow-x:auto;
- padding:8px 0 15px;
-}
-.categories button{
- border:0;background:white;color:#5548db;
- padding:11px 17px;border-radius:30px;
- font-weight:bold;white-space:nowrap;
-}
-.categories button.active{background:#5548db;color:white}
-.layout{
- display:grid;grid-template-columns:1.5fr .8fr;
- gap:15px;align-items:start;
-}
-.card{
- background:white;border-radius:23px;padding:17px;
- box-shadow:0 5px 20px #26234b12;
-}
-.progress{
- height:7px;background:#ededf8;border-radius:20px;
- margin:10px 0 15px;overflow:hidden;
-}
-.progress span{
- display:block;height:100%;background:#ff8caa;width:0%;
- transition:.3s;
-}
-.topline{
- display:flex;justify-content:space-between;
- color:#77758e;font-size:13px;font-weight:bold;
-}
-.photo{
- height:290px;background:#f0f2f8;border-radius:18px;
- overflow:hidden;position:relative;
- display:flex;align-items:center;justify-content:center;
-}
-.photo img{
- width:100%;height:100%;object-fit:cover;
- display:block;
-}
-.photo .fallback{
- font-size:100px;display:none;
-}
-.name{text-align:center;font-size:30px;font-weight:900;margin-top:14px}
-.hindi{text-align:center;color:#6658dc;font-size:22px;font-weight:bold;margin-top:5px}
-.info{
- background:#f1efff;border-radius:14px;padding:12px;
- margin-top:13px;font-size:14px;line-height:1.5;
- text-align:center;
-}
-.question{
- background:#fff4d6;padding:14px;
- border-radius:14px;margin-top:14px;
- text-align:center;font-weight:bold;
-}
-.buttons{
- display:flex;justify-content:center;flex-wrap:wrap;
- gap:8px;margin-top:12px;
-}
-.btn{
- border:0;border-radius:13px;padding:13px 15px;
- font-weight:bold;font-size:14px;
-}
-.purple{background:#5548db;color:white}
-.light{background:#efedff;color:#5548db}
-.pink{background:#ffe8f0;color:#c04475}
-.green{background:#e3f8ee;color:#16855d}
-.side h3{margin:0 0 10px}
-.side p{font-size:14px;color:#77758e;line-height:1.6}
-.side .btn{width:100%;margin:5px 0}
-.stat{
- border-top:1px solid #eee;padding:13px 0;
- display:flex;justify-content:space-between;font-weight:bold;
-}
-.stat span:last-child{color:#6254db}
-.quiz{margin-top:16px}
-.quiz h2{margin-top:0}
-.quizphoto{
- height:155px;width:100%;object-fit:cover;
- border-radius:15px;background:#eee;
-}
-.options{
- display:grid;grid-template-columns:1fr 1fr;
- gap:9px;margin-top:12px;
-}
-.options button{
- background:#f0efff;color:#5548db;
- border:2px solid transparent;border-radius:12px;
- padding:14px;font-weight:bold;
-}
-.options button.correct{background:#e2f8ed;border-color:#21b77e}
-.options button.wrong{background:#ffe8ed;border-color:#ed7094}
-.feedback{text-align:center;font-weight:bold;min-height:28px;margin-top:12px}
-footer{text-align:center;color:#9290a5;font-size:12px;padding:25px}
-@media(max-width:680px){
- .layout{grid-template-columns:1fr}
- .photo{height:250px}
- .side{order:2}
- header h1{font-size:21px}
- .name{font-size:27px}
-}
+body{margin:0;font-family:Arial,sans-serif;background:#eaf6ff;color:#18324b}
+header{background:linear-gradient(120deg,#0877c9,#35b9e8);color:white;text-align:center;padding:22px 12px}
+header h1{margin:0;font-size:29px}
+header p{margin:8px 0 0}
+.wrap{max-width:850px;margin:auto;padding:14px}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:8px 0}
+.tabs button,.btn{border:0;border-radius:22px;padding:11px 16px;background:#fff;color:#1269a8;font-weight:bold;white-space:nowrap;box-shadow:0 2px 7px #0001}
+.tabs button.active,.btn.primary{background:#0877c9;color:white}
+.card{background:white;border-radius:22px;padding:16px;box-shadow:0 5px 18px #1a5b8520;margin-top:12px;text-align:center}
+.counter{color:#55738b;font-weight:bold}
+.photoBox{height:300px;background:#f0f7fc;border-radius:17px;margin:14px 0;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.photoBox img{width:100%;height:100%;object-fit:contain;display:none}
+#loading{font-size:17px;color:#55738b;padding:20px}
+#vehicleName{font-size:30px;color:#0877c9;margin:8px}
+#hindiName{font-size:24px;color:#ed7a17;margin:5px}
+#description{font-size:16px;line-height:1.5;color:#496276}
+.controls{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-top:15px}
+.btn{background:#e5f3ff;color:#1269a8;cursor:pointer}
+.btn.primary{background:#0877c9;color:white}
+.btn.orange{background:#ff9c31;color:white}
+.btn.green{background:#1caa72;color:white}
+.credit{font-size:11px;color:#789;margin-top:8px}
+.stats{display:flex;justify-content:space-around;gap:8px;margin-top:14px}
+.stat{background:#f0f8ff;border-radius:13px;padding:12px;flex:1}
+.stat b{display:block;font-size:22px;color:#0877c9}
+.quizQuestion{font-size:20px;font-weight:bold;margin:12px}
+.option{display:block;width:100%;margin:8px 0;padding:13px;border:2px solid #d8eaf7;border-radius:13px;background:white;font-size:16px}
+footer{text-align:center;padding:20px;color:#789;font-size:13px}
 </style>
 </head>
-
 <body>
-
 <header>
- <div class="head">
-  <div>
-   <div style="display:flex;align-items:center;gap:9px">
-    <span class="logo">🚗</span>
-    <div>
-     <h1>Vroom Vroom Kids</h1>
-     <p>LET'S LEARN • PLAY • EXPLORE</p>
-    </div>
-   </div>
-  </div>
-  <button class="sound" id="sound">🔊 ON</button>
- </div>
+<h1>🚘 Vroom Vroom Kids</h1>
+<p>Let's learn vehicles – गाड़ियों को पहचानें और सीखें!</p>
 </header>
 
-<div class="container">
+<div class="wrap">
+<div class="tabs" id="tabs"></div>
 
-<div class="welcome">
- <h2>🌈 Hello Little Explorer!</h2>
- <p>Let's discover the wonderful world of vehicles!</p>
+<div class="card">
+<div class="counter" id="counter">Loading...</div>
+<div class="photoBox">
+<div id="loading">तस्वीर खोजी जा रही है...</div>
+<img id="vehiclePhoto" alt="Vehicle photo">
+</div>
+<div id="vehicleName">Vehicle</div>
+<div id="hindiName">वाहन</div>
+<div id="description"></div>
+<div class="credit" id="credit"></div>
+
+<div class="controls">
+<button class="btn" onclick="previousVehicle()">◀ Previous</button>
+<button class="btn primary" onclick="nextVehicle()">Next ▶</button>
+</div>
+<div class="controls">
+<button class="btn orange" onclick="askMe()">🔊 Ask Me</button>
+<button class="btn green" onclick="tellMe()">🗣 Tell Me</button>
+<button class="btn" onclick="repeatVoice()">🔁 Repeat</button>
+<button class="btn" onclick="toggleAuto()" id="autoButton">▶ Auto Learning</button>
+</div>
 </div>
 
-<div class="categories" id="categories"></div>
-
-<div class="layout">
-
-<section class="card">
-
- <div class="topline">
-  <span id="categoryName">ALL VEHICLES</span>
-  <span id="counter">1 / 50</span>
- </div>
-
- <div class="progress"><span id="progress"></span></div>
-
- <div class="photo">
-  <img id="vehicleImage" src="" alt="Vehicle photograph">
-  <div class="fallback" id="fallback">🚗</div>
- </div>
-
- <div class="name" id="english"></div>
- <div class="hindi" id="hindi"></div>
-
- <div class="info" id="description">
-  Let's learn about this vehicle!
- </div>
-
- <div class="question" id="question">
-  🎤 Hello children! What is this?
- </div>
-
- <div class="buttons">
-  <button class="btn light" onclick="ask()">🎤 Ask Me</button>
-  <button class="btn purple" onclick="answer()">✨ Tell Me</button>
-  <button class="btn pink" onclick="repeat()">🔊 Repeat</button>
- </div>
-
- <div class="buttons">
-  <button class="btn light" onclick="previous()">← Previous</button>
-  <button class="btn purple" onclick="next()">Next Vehicle →</button>
- </div>
-
-</section>
-
-<aside class="card side">
- <h3>🎈 Learning Corner</h3>
- <p>Look at the picture carefully. Listen to the teacher and learn the vehicle's name in two languages.</p>
-
- <button class="btn purple" onclick="autoStart()">▶ Auto Learning</button>
- <button class="btn pink" onclick="stopAuto()">⏹ Stop Learning</button>
-
- <div style="height:15px"></div>
-
- <div class="stat">
-  <span>⭐ Stars</span><span id="stars">0</span>
- </div>
- <div class="stat">
-  <span>🚘 Learned</span><span id="learned">0</span>
- </div>
- <div class="stat">
-  <span>📚 Total</span><span>50</span>
- </div>
- <p>Keep learning, little champion! 🌟</p>
-</aside>
-
+<div class="card">
+<h2>⭐ My Learning Corner</h2>
+<div class="stats">
+<div class="stat"><b id="learned">0</b>Learned</div>
+<div class="stat"><b id="total">50</b>Total Vehicles</div>
+</div>
 </div>
 
-<section class="card quiz">
- <h2>🧠 Guess the Vehicle!</h2>
- <p>Look at the photograph and choose the correct answer.</p>
-
- <img class="quizphoto" id="quizImage" src="" alt="Guess the vehicle">
-
- <div class="options" id="options"></div>
- <div class="feedback" id="feedback"></div>
-
- <button class="btn purple" onclick="newQuiz()">Next Question →</button>
-</section>
-
+<div class="card">
+<h2>🎯 Guess the Vehicle!</h2>
+<p id="quizQuestion" class="quizQuestion">इस वाहन को पहचानिए।</p>
+<div id="quizOptions"></div>
+<p id="quizResult"></p>
+<button class="btn primary" onclick="newQuiz()">Next Question</button>
+</div>
 </div>
 
-<footer>
- Made with ❤️ for little learners<br>
- Vroom Vroom Kids • Version 2.0
-</footer>
+<footer>Made with ❤️ for Little Learners | Vroom Vroom Kids</footer>
 
 <script>
-
-// REAL VEHICLE PHOTOGRAPHS
-const images={
- car:"https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1000&auto=format&fit=crop&q=85",
- bus:"https://images.unsplash.com/photo-1570125909232-eb263c188f7e?w=1000&auto=format&fit=crop&q=85",
- truck:"https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=1000&auto=format&fit=crop&q=85",
- taxi:"https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=1000&auto=format&fit=crop&q=85",
- van:"https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=1000&auto=format&fit=crop&q=85",
- bike:"https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=1000&auto=format&fit=crop&q=85",
- bicycle:"https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=1000&auto=format&fit=crop&q=85",
- train:"https://images.unsplash.com/photo-1474487548417-781cb71495f3?w=1000&auto=format&fit=crop&q=85",
- plane:"https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1000&auto=format&fit=crop&q=85",
- helicopter:"https://images.unsplash.com/photo-1474302770737-173ee21bab63?w=1000&auto=format&fit=crop&q=85",
- ship:"https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=1000&auto=format&fit=crop&q=85",
- boat:"https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1000&auto=format&fit=crop&q=85",
- tractor:"https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1000&auto=format&fit=crop&q=85",
- work:"https://images.unsplash.com/photo-1581094794329-c6ec0e9bb8aa?w=1000&auto=format&fit=crop&q=85",
- rescue:"https://images.unsplash.com/photo-1587745416684-47953f16f02f?w=1000&auto=format&fit=crop&q=85"
-};
-
-// VEHICLE DATABASE
-// Format: English, Hindi, picture, category, description
-
-const data=[
-["Car","कार","car","Road","A car is used to travel from one place to another."],
-["Bus","बस","bus","Road","A bus carries many passengers."],
-["Truck","ट्रक","truck","Road","A truck carries heavy goods."],
-["Taxi","टैक्सी","taxi","Road","A taxi takes people to their destination."],
-["Van","वैन","van","Road","A van can carry people or goods."],
-["Police Car","पुलिस कार","taxi","Special","A police car helps police officers."],
-["Ambulance","एम्बुलेंस","rescue","Special","An ambulance takes sick people to hospital."],
-["Fire Engine","दमकल गाड़ी","rescue","Special","A fire engine helps put out fires."],
-["Auto Rickshaw","ऑटो रिक्शा","taxi","Road","An auto rickshaw carries passengers."],
-["Tractor","ट्रैक्टर","tractor","Work","A tractor helps farmers in the fields."],
-["Motorcycle","मोटरसाइकिल","bike","Road","A motorcycle has two wheels."],
-["Scooter","स्कूटर","bike","Road","A scooter is a two-wheeled vehicle."],
-["Bicycle","साइकिल","bicycle","Road","A bicycle moves when we pedal."],
-["School Bus","स्कूल बस","bus","Special","A school bus takes children to school."],
-["Pickup Truck","पिकअप ट्रक","truck","Road","A pickup truck carries goods."],
-["Race Car","रेस कार","car","Road","A race car is made for speed."],
-["Minibus","मिनी बस","bus","Road","A minibus carries a small group of people."],
-["Electric Car","इलेक्ट्रिक कार","car","Road","An electric car runs using electricity."],
-["Road Roller","रोड रोलर","work","Work","A road roller makes roads smooth."],
-["Bulldozer","बुलडोजर","work","Work","A bulldozer moves soil and rubble."],
-["Train","रेलगाड़ी","train","Rail","A train travels on railway tracks."],
-["Metro","मेट्रो","train","Rail","A metro train carries people around cities."],
-["Bullet Train","बुलेट ट्रेन","train","Rail","A bullet train is a very fast train."],
-["Steam Train","भाप की रेलगाड़ी","train","Rail","A steam train uses steam power."],
-["Freight Train","मालगाड़ी","train","Rail","A freight train carries goods."],
-["Aeroplane","हवाई जहाज","plane","Air","An aeroplane flies in the sky."],
-["Helicopter","हेलीकॉप्टर","helicopter","Air","A helicopter can take off vertically."],
-["Jet Plane","जेट विमान","plane","Air","A jet plane flies very fast."],
-["Cargo Plane","मालवाहक विमान","plane","Air","A cargo plane carries goods."],
-["Glider","ग्लाइडर","plane","Air","A glider flies without an engine."],
-["Ship","जहाज","ship","Water","A ship travels across the sea."],
-["Boat","नाव","boat","Water","A boat travels on water."],
-["Speedboat","तेज नाव","boat","Water","A speedboat moves quickly on water."],
-["Sailboat","पाल वाली नाव","boat","Water","A sailboat uses wind to move."],
-["Ferry","नौका जहाज","ship","Water","A ferry carries people across water."],
-["Submarine","पनडुब्बी","ship","Water","A submarine travels underwater."],
-["Crane","क्रेन","work","Work","A crane lifts heavy objects."],
-["Excavator","खुदाई मशीन","work","Work","An excavator digs the ground."],
-["Dump Truck","डंप ट्रक","truck","Work","A dump truck carries loose materials."],
-["Cement Mixer","कंक्रीट मिक्सर","work","Work","A cement mixer mixes concrete."],
-["Forklift","फोर्कलिफ्ट","work","Work","A forklift lifts and moves heavy loads."],
-["Snowplough","बर्फ हटाने वाली गाड़ी","truck","Work","A snowplough clears snow from roads."],
-["Garbage Truck","कचरा गाड़ी","truck","Special","A garbage truck collects rubbish."],
-["Tow Truck","टो ट्रक","truck","Special","A tow truck moves broken vehicles."],
-["School Van","स्कूल वैन","van","Special","A school van takes children to school."],
-["Fire Helicopter","फायर हेलीकॉप्टर","helicopter","Special","A fire helicopter can help fight forest fires."],
-["Rescue Boat","बचाव नाव","boat","Special","A rescue boat helps people in danger."],
-["Rickshaw","रिक्शा","bike","Road","A rickshaw carries passengers."],
-["Horse Carriage","घोड़ा गाड़ी","taxi","Road","A horse pulls this carriage."],
-["Rocket","रॉकेट","plane","Air","A rocket travels into space."],
-["Hot Air Balloon","गर्म हवा का गुब्बारा","plane","Air","A hot air balloon floats in the sky."]
+const vehicles = [
+["Car","कार","A car carries people on roads.","Road","car automobile vehicle"],
+["Bus","बस","A bus carries many passengers.","Road","bus public transport"],
+["Truck","ट्रक","A truck carries heavy goods.","Road","truck lorry"],
+["Bicycle","साइकिल","A bicycle has two wheels.","Road","bicycle cycle"],
+["Motorcycle","मोटरसाइकिल","A motorcycle has two wheels and an engine.","Road","motorcycle motorbike"],
+["Scooter","स्कूटर","A scooter is a two-wheeler.","Road","scooter vehicle"],
+["Auto Rickshaw","ऑटो रिक्शा","An auto rickshaw carries passengers.","Road","auto rickshaw tuk tuk"],
+["Taxi","टैक्सी","A taxi takes people to places.","Road","taxi cab car"],
+["Ambulance","एम्बुलेंस","An ambulance takes sick people to hospital.","Special","ambulance vehicle"],
+["Fire Engine","दमकल","A fire engine helps put out fires.","Special","fire engine fire truck"],
+["Police Car","पुलिस कार","A police car helps keep people safe.","Special","police car vehicle"],
+["Tractor","ट्रैक्टर","A tractor helps farmers in fields.","Work","tractor farm"],
+["JCB","जेसीबी","A JCB digs and moves soil.","Work","JCB excavator digger"],
+["Bulldozer","बुलडोजर","A bulldozer pushes soil and rocks.","Work","bulldozer construction"],
+["Road Roller","रोड रोलर","A road roller makes roads smooth.","Work","road roller construction"],
+["Train","ट्रेन","A train runs on railway tracks.","Rail","passenger train railway"],
+["Metro","मेट्रो","A metro train carries people in cities.","Rail","metro train subway"],
+["Steam Locomotive","भाप का इंजन","A steam locomotive runs using steam.","Rail","steam locomotive train"],
+["Goods Train","मालगाड़ी","A goods train carries cargo.","Rail","freight train goods train"],
+["Bullet Train","बुलेट ट्रेन","A bullet train travels very fast.","Rail","high speed bullet train"],
+["Aeroplane","हवाई जहाज","An aeroplane flies in the sky.","Air","passenger airplane aircraft"],
+["Helicopter","हेलीकॉप्टर","A helicopter can fly up and down.","Air","helicopter aircraft"],
+["Fighter Jet","लड़ाकू विमान","A fighter jet is a fast military aircraft.","Air","fighter jet aircraft"],
+["Hot Air Balloon","गर्म हवा का गुब्बारा","A hot air balloon floats in the sky.","Air","hot air balloon"],
+["Glider","ग्लाइडर","A glider flies without an engine.","Air","glider aircraft"],
+["Ship","जहाज","A ship travels on water.","Water","cargo ship ocean"],
+["Boat","नाव","A boat travels on water.","Water","small boat river"],
+["Sailboat","पाल वाली नाव","A sailboat moves with the wind.","Water","sailboat sailing"],
+["Submarine","पनडुब्बी","A submarine travels underwater.","Water","submarine underwater"],
+["Ferry","फेरी","A ferry carries people across water.","Water","ferry boat passenger"],
+["Yacht","यॉट","A yacht is a pleasure boat.","Water","yacht boat"],
+["Canoe","डोंगी","A canoe is a narrow small boat.","Water","canoe boat"],
+["Rocket","रॉकेट","A rocket travels into space.","Air","space rocket launch"],
+["Space Shuttle","अंतरिक्ष यान","A space shuttle travels into space.","Air","space shuttle spacecraft"],
+["Tank","टैंक","A tank is a military vehicle.","Special","military tank vehicle"],
+["Jeep","जीप","A jeep can travel on rough roads.","Road","jeep off road vehicle"],
+["Van","वैन","A van carries people or goods.","Road","van vehicle"],
+["Pickup Truck","पिकअप ट्रक","A pickup truck carries goods.","Road","pickup truck"],
+["School Bus","स्कूल बस","A school bus takes children to school.","Road","yellow school bus"],
+["Electric Car","इलेक्ट्रिक कार","An electric car runs on battery power.","Road","electric car vehicle"],
+["Garbage Truck","कचरा गाड़ी","A garbage truck collects waste.","Work","garbage truck refuse vehicle"],
+["Cement Mixer","सीमेंट मिक्सर","A cement mixer mixes concrete.","Work","concrete mixer truck"],
+["Crane","क्रेन","A crane lifts heavy things.","Work","mobile crane construction"],
+["Forklift","फोर्कलिफ्ट","A forklift lifts and moves heavy loads.","Work","forklift warehouse"],
+["Snowmobile","स्नोमोबाइल","A snowmobile travels over snow.","Special","snowmobile vehicle"],
+["Golf Cart","गोल्फ कार्ट","A golf cart is a small vehicle.","Road","golf cart"],
+["Rickshaw","रिक्शा","A rickshaw carries passengers.","Road","cycle rickshaw"],
+["Horse Carriage","घोड़ा गाड़ी","A horse pulls this carriage.","Special","horse drawn carriage"],
+["Cable Car","केबल कार","A cable car travels on cables.","Special","cable car mountain"],
+["Monorail","मोनोरेल","A monorail runs on one rail.","Rail","monorail train"]
 ];
 
 const categories=["All","Road","Rail","Air","Water","Work","Special"];
+let current=0, filtered=[...vehicles], autoTimer=null, quizAnswer=null;
+let learnedSet=new Set();
+let lastSpeech="";
 
-let category="All";
-let list=data.map((v,i)=>i);
-let index=0;
-let stars=0;
-let learned=new Set();
-let soundOn=true;
-let autoTimer=null;
-let quizAnswer=null;
-let quizLocked=false;
+const photo=document.getElementById("vehiclePhoto");
+const loading=document.getElementById("loading");
+const nameEl=document.getElementById("vehicleName");
+const hindiEl=document.getElementById("hindiName");
+const descEl=document.getElementById("description");
+const creditEl=document.getElementById("credit");
 
-const el=id=>document.getElementById(id);
+function makeTabs(){
+ const tabs=document.getElementById("tabs");
+ tabs.innerHTML="";
+ categories.forEach(cat=>{
+  const b=document.createElement("button");
+  b.textContent=cat==="All"?"All Vehicles":cat;
+  if(cat==="All")b.classList.add("active");
+  b.onclick=()=>{
+   document.querySelectorAll(".tabs button").forEach(x=>x.classList.remove("active"));
+   b.classList.add("active");
+   filtered=cat==="All"?[...vehicles]:vehicles.filter(v=>v[3]===cat);
+   current=0;showVehicle();
+  };
+  tabs.appendChild(b);
+ });
+}
 
-function speak(text,lang="en-US"){
- if(!soundOn || !window.speechSynthesis)return;
+async function findPhoto(searchTerm){
+ const params=new URLSearchParams({
+  action:"query",
+  generator:"search",
+  gsrsearch:"filetype:bitmap "+searchTerm,
+  gsrnamespace:"6",
+  gsrlimit:"8",
+  prop:"imageinfo",
+  iiprop:"url",
+  iiurlwidth:"900",
+  format:"json",
+  origin:"*"
+ });
+ const response=await fetch("https://commons.wikimedia.org/w/api.php?"+params);
+ if(!response.ok)throw new Error("Image search failed");
+ const data=await response.json();
+ const pages=Object.values(data.query?.pages||{});
+ for(const p of pages){
+  const info=p.imageinfo?.[0];
+  if(info?.thumburl && !/\.svg(\?|$)/i.test(info.thumburl)){
+   return {src:info.thumburl,page:info.descriptionurl,title:p.title};
+  }
+ }
+ throw new Error("No photo found");
+}
+
+async function showVehicle(){
+ const v=filtered[current];
+ if(!v)return;
+ photo.style.display="none";
+ photo.removeAttribute("src");
+ loading.style.display="block";
+ loading.textContent="तस्वीर खोजी जा रही है...";
+ creditEl.textContent="";
+ nameEl.textContent=v[0];
+ hindiEl.textContent=v[1];
+ descEl.textContent=v[2];
+ document.getElementById("counter").textContent=
+  "Vehicle "+(current+1)+" / "+filtered.length;
+ document.getElementById("learned").textContent=learnedSet.size;
+ document.getElementById("total").textContent=vehicles.length;
+
+ try{
+  const result=await findPhoto(v[4]);
+  if(filtered[current]!==v)return;
+  photo.onload=()=>{
+   loading.style.display="none";
+   photo.style.display="block";
+  };
+  photo.onerror=()=>{
+   loading.style.display="block";
+   loading.textContent="तस्वीर लोड नहीं हुई। फिर कोशिश करें।";
+   photo.style.display="none";
+  };
+  photo.src=result.src;
+  creditEl.innerHTML="";
+  const link=document.createElement("a");
+  link.href=result.page;
+  link.target="_blank";
+  link.rel="noopener";
+  link.textContent="Photo source: Wikimedia Commons";
+  creditEl.appendChild(link);
+ }catch(e){
+  loading.style.display="block";
+  loading.textContent="तस्वीर अभी नहीं मिली। Retry दबाएँ।";
+  const retry=document.createElement("button");
+  retry.className="btn";
+  retry.textContent="Retry Photo";
+  retry.onclick=showVehicle;
+  creditEl.appendChild(retry);
+ }
+}
+
+function nextVehicle(){
+ current=(current+1)%filtered.length;
+ showVehicle();
+}
+function previousVehicle(){
+ current=(current-1+filtered.length)%filtered.length;
+ showVehicle();
+}
+
+function speak(text,lang){
+ if(!("speechSynthesis" in window)){
+  alert("इस browser में voice support उपलब्ध नहीं है।");
+  return;
+ }
  speechSynthesis.cancel();
- let msg=new SpeechSynthesisUtterance(text);
+ lastSpeech=text;
+ const msg=new SpeechSynthesisUtterance(text);
  msg.lang=lang;
- msg.rate=.86;
- msg.pitch=1.08;
+ msg.rate=0.88;
+ msg.pitch=1.05;
  speechSynthesis.speak(msg);
 }
-
-function imageError(img){
- img.style.display="none";
- el("fallback").style.display="block";
+function askMe(){
+ const v=filtered[current];
+ speak("Hello kids! What is this? बच्चों, बताओ यह क्या है?","hi-IN");
+}
+function tellMe(){
+ const v=filtered[current];
+ learnedSet.add(v[0]);
+ document.getElementById("learned").textContent=learnedSet.size;
+ speak("This is a "+v[0]+". हिंदी में इसे "+v[1]+" कहते हैं। "+v[2],"en-IN");
+}
+function repeatVoice(){
+ if(lastSpeech)speak(lastSpeech,"en-IN");
+ else tellMe();
+}
+function toggleAuto(){
+ const b=document.getElementById("autoButton");
+ if(autoTimer){
+  clearInterval(autoTimer);autoTimer=null;
+  b.textContent="▶ Auto Learning";
+ }else{
+  b.textContent="⏸ Stop Learning";
+  tellMe();
+  autoTimer=setInterval(()=>{nextVehicle();setTimeout(tellMe,900)},6500);
+ }
 }
 
-function current(){return data[list[index]]}
-
-function render(){
- let v=current();
- let img=el("vehicleImage");
- img.style.display="block";
- el("fallback").style.display="none";
- img.onerror=()=>imageError(img);
- img.src=images[v[2]];
- img.alt=v[0]+" photograph";
-
- el("english").textContent=v[0];
- el("hindi").textContent=v[1];
- el("description").textContent=v[4];
- el("counter").textContent=(index+1)+" / "+list.length;
- el("categoryName").textContent=category.toUpperCase()+" VEHICLES";
- el("progress").style.width=((index+1)/list.length*100)+"%";
- el("question").textContent="🎤 Hello children! What is this?";
-}
-
-function buildCategories(){
- let box=el("categories");
+function newQuiz(){
+ const correct=vehicles[Math.floor(Math.random()*vehicles.length)];
+ quizAnswer=correct;
+ document.getElementById("quizQuestion").textContent=
+  "इस वाहन का सही English नाम चुनिए: "+correct[1];
+ const options=[correct];
+ while(options.length<4){
+  const x=vehicles[Math.floor(Math.random()*vehicles.length)];
+  if(!options.includes(x))options.push(x);
+ }
+ options.sort(()=>Math.random()-0.5);
+ const box=document.getElementById("quizOptions");
  box.innerHTML="";
- categories.forEach(c=>{
-  let b=document.createElement("button");
-  b.textContent=c==="All"?"🌟 All":c;
-  if(category===c)b.classList.add("active");
+ options.forEach(x=>{
+  const b=document.createElement("button");
+  b.className="option";
+  b.textContent=x[0];
   b.onclick=()=>{
-   stopAuto();
-   category=c;
-   list=data.map((v,i)=>i).filter(i=>c==="All"||data[i][3]===c);
-   index=0;
-   buildCategories();
-   render();
-   ask();
+   if(x===quizAnswer){
+    document.getElementById("quizResult").textContent="🎉 सही जवाब! Very good, superstar!";
+    speak("Correct answer! Very good, superstar!","en-IN");
+   }else{
+    document.getElementById("quizResult").textContent="Try again, champ! फिर कोशिश करो।";
+    speak("Try again, champ!","en-IN");
+   }
   };
   box.appendChild(b);
  });
+ document.getElementById("quizResult").textContent="";
 }
 
-function ask(){
- let v=current();
- el("question").textContent="🎤 बच्चों! बताओ, यह क्या है? What is this?";
- speak("Hello children! What is this?");
- setTimeout(()=>{
-  if(soundOn && current()===v)
-   speak("बच्चों, बताओ यह क्या है?","hi-IN");
- },1800);
-}
-
-function answer(){
- let v=current();
- learned.add(list[index]);
- el("learned").textContent=learned.size;
- el("question").textContent="🌟 Very Good! This is "+v[0]+". हिंदी में इसे "+v[1]+" कहते हैं।";
- speak("Very good! This is "+v[0]+".");
- setTimeout(()=>{
-  if(soundOn && current()===v)
-   speak("हिंदी में इसे "+v[1]+" कहते हैं। "+v[4],"hi-IN");
- },1700);
-}
-
-function repeat(){
- let v=current();
- speak(v[0],"en-US");
- setTimeout(()=>speak(v[1],"hi-IN"),1300);
-}
-
-function next(){
- index=(index+1)%list.length;
- render();
- ask();
-}
-
-function previous(){
- index=(index-1+list.length)%list.length;
- render();
- ask();
-}
-
-function autoStart(){
- stopAuto();
- ask();
- autoTimer=setInterval(()=>{
-  answer();
-  setTimeout(()=>next(),4000);
- },7500);
-}
-
-function stopAuto(){
- if(autoTimer)clearInterval(autoTimer);
- autoTimer=null;
- if(window.speechSynthesis)speechSynthesis.cancel();
-}
-
-el("sound").onclick=()=>{
- soundOn=!soundOn;
- el("sound").textContent=soundOn?"🔊 ON":"🔇 OFF";
- if(!soundOn)speechSynthesis.cancel();
-};
-
-// QUIZ
-function newQuiz(){
- quizLocked=false;
- let target=data[Math.floor(Math.random()*data.length)];
- quizAnswer=target;
-
- let img=el("quizImage");
- img.src=images[target[2]];
- img.onerror=()=>{img.style.display="none"};
- img.style.display="block";
-
- let choices=[target];
- while(choices.length<4){
-  let v=data[Math.floor(Math.random()*data.length)];
-  if(!choices.includes(v))choices.push(v);
- }
- choices.sort(()=>Math.random()-.5);
-
- el("options").innerHTML="";
- el("feedback").textContent="";
-
- choices.forEach(v=>{
-  let b=document.createElement("button");
-  b.textContent=v[0];
-  b.onclick=()=>{
-   if(quizLocked)return;
-   if(v===quizAnswer){
-    quizLocked=true;
-    b.classList.add("correct");
-    stars++;
-    el("stars").textContent=stars;
-    el("feedback").textContent="🎉 Excellent! बिल्कुल सही! +1 Star";
-    speak("Excellent! You got it right!");
-   }else{
-    b.classList.add("wrong");
-    el("feedback").textContent="😊 Try again, little champion!";
-    speak("Try again, little champion!");
-   }
-  };
-  el("options").appendChild(b);
- });
-}
-
-buildCategories();
-render();
+makeTabs();
+document.getElementById("total").textContent=vehicles.length;
+showVehicle();
 newQuiz();
-
 </script>
 </body>
 </html>
