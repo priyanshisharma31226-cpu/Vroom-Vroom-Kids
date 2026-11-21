@@ -1,0 +1,236 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#6558e9">
+<title>Vroom Vroom Kids</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f3f3ff;color:#242447}
+header{background:linear-gradient(120deg,#6256e8,#a27bfa);color:white;padding:20px;border-radius:0 0 28px 28px}
+header h1{margin:0;font-size:27px}
+header p{margin:7px 0 0}
+.container{max-width:750px;margin:auto;padding:15px}
+.hero{background:white;padding:17px;border-radius:22px;text-align:center;box-shadow:0 5px 20px #0001}
+.vehicle{height:250px;display:flex;align-items:center;justify-content:center;background:linear-gradient(#dff5ff,#fff);border-radius:20px;margin:12px 0;overflow:hidden}
+.vehicle svg{width:90%;max-width:400px;height:210px}
+.name{font-size:30px;font-weight:bold;margin:8px}
+.hindi{font-size:22px;color:#6b62dc;font-weight:bold}
+.question{background:#fff4cf;padding:14px;border-radius:15px;margin:15px 0;font-weight:bold}
+button{border:0;border-radius:14px;padding:13px 17px;font-size:15px;font-weight:bold;cursor:pointer;margin:4px}
+.primary{background:#6256e8;color:white}
+.secondary{background:#eeeaff;color:#5145c7}
+.pink{background:#ffe7f0;color:#bd3970}
+.buttons{display:flex;justify-content:center;flex-wrap:wrap}
+.categories{display:flex;gap:7px;overflow:auto;margin:15px 0}
+.categories button{white-space:nowrap;background:white;color:#5145c7}
+.categories button.active{background:#6256e8;color:white}
+.quiz{background:white;padding:18px;border-radius:20px;margin-top:16px}
+.quiz button{background:#eeeaff;color:#5145c7;width:45%}
+.stats{display:flex;justify-content:space-around;margin-top:15px;background:white;padding:15px;border-radius:15px;font-weight:bold}
+footer{text-align:center;padding:25px;color:#777}
+</style>
+</head>
+<body>
+<header>
+<h1>🚗 Vroom Vroom Kids</h1>
+<p>Let's Learn • Play • Explore 🌈</p>
+</header>
+
+<div class="container">
+<div class="hero">
+<h2>Welcome Little Explorer! ⭐</h2>
+<p>Learn vehicles in English and Hindi</p>
+
+<div class="categories" id="categories"></div>
+
+<div class="vehicle" id="picture"></div>
+
+<div class="name" id="english"></div>
+<div class="hindi" id="hindi"></div>
+
+<div class="question" id="question">
+🎤 Hello kids! What is this?
+</div>
+
+<div class="buttons">
+<button class="secondary" onclick="ask()">🎤 Ask Me</button>
+<button class="primary" onclick="answer()">✨ Tell Me</button>
+<button class="pink" onclick="repeat()">🔊 Repeat</button>
+</div>
+
+<div class="buttons" style="margin-top:15px">
+<button class="secondary" onclick="previous()">⬅ Previous</button>
+<button class="primary" onclick="next()">Next ➡</button>
+</div>
+</div>
+
+<div class="stats">
+<div>⭐ Stars: <span id="stars">0</span></div>
+<div>🚘 Learned: <span id="learned">0</span></div>
+</div>
+
+<div class="quiz">
+<h2>🧠 Guess the Vehicle!</h2>
+<div id="quizPicture" style="font-size:65px;text-align:center"></div>
+<p style="text-align:center">Which vehicle is this?</p>
+<div id="options" style="text-align:center"></div>
+<p id="feedback" style="text-align:center;font-weight:bold"></p>
+<button class="primary" onclick="newQuiz()">Next Question</button>
+</div>
+</div>
+
+<footer>❤️ Made for little champions | Vroom Vroom Kids</footer>
+
+<script>
+const data=[
+["Car","कार","🚗","Road"],
+["Bus","बस","🚌","Road"],
+["Truck","ट्रक","🚚","Road"],
+["Taxi","टैक्सी","🚕","Road"],
+["Ambulance","एम्बुलेंस","🚑","Road"],
+["Fire Engine","दमकल गाड़ी","🚒","Road"],
+["Police Car","पुलिस कार","🚓","Road"],
+["Van","वैन","🚐","Road"],
+["Auto Rickshaw","ऑटो रिक्शा","🛺","Road"],
+["Tractor","ट्रैक्टर","🚜","Road"],
+["Bicycle","साइकिल","🚲","Road"],
+["Motorcycle","मोटरसाइकिल","🏍️","Road"],
+["Scooter","स्कूटर","🛵","Road"],
+["Train","रेलगाड़ी","🚆","Rail"],
+["Metro","मेट्रो","🚇","Rail"],
+["Bullet Train","बुलेट ट्रेन","🚄","Rail"],
+["Aeroplane","हवाई जहाज़","✈️","Air"],
+["Helicopter","हेलीकॉप्टर","🚁","Air"],
+["Rocket","रॉकेट","🚀","Air"],
+["Hot Air Balloon","गर्म हवा का गुब्बारा","🎈","Air"],
+["Ship","जहाज़","🚢","Water"],
+["Boat","नाव","⛵","Water"],
+["Speed Boat","तेज़ नाव","🚤","Water"],
+["Submarine","पनडुब्बी","🛟","Water"],
+["Bulldozer","बुलडोज़र","🚜","Work"],
+["Crane","क्रेन","🏗️","Work"],
+["Road Roller","रोड रोलर","🚧","Work"],
+["Excavator","खुदाई मशीन","🚜","Work"],
+["School Bus","स्कूल बस","🚌","Special"],
+["Minibus","मिनी बस","🚐","Special"]
+];
+
+let category="All",list=data.map((v,i)=>i),index=0;
+let stars=0,learned=new Set(),currentQuiz=null;
+
+function vehicleSVG(emoji){
+return `<svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg">
+<circle cx="65" cy="45" r="24" fill="#fff" opacity=".8"/>
+<circle cx="330" cy="55" r="32" fill="#fff" opacity=".8"/>
+<path d="M0 185 Q100 165 200 185 T400 185 V220 H0" fill="#c5ebc6"/>
+<text x="200" y="150" font-size="125" text-anchor="middle">${emoji}</text>
+</svg>`;
+}
+
+function speak(text,lang="en-US"){
+if(!window.speechSynthesis)return;
+speechSynthesis.cancel();
+let msg=new SpeechSynthesisUtterance(text);
+msg.lang=lang;msg.rate=.85;msg.pitch=1.1;
+speechSynthesis.speak(msg);
+}
+
+function render(){
+let v=data[list[index]];
+document.getElementById("picture").innerHTML=vehicleSVG(v[2]);
+document.getElementById("english").textContent=v[0];
+document.getElementById("hindi").textContent=v[1];
+document.getElementById("question").textContent=
+"🎤 Hello kids! What is this?";
+}
+
+function ask(){
+document.getElementById("question").textContent=
+"🎤 बच्चों! बताओ, यह क्या है?";
+speak("Hello children! What is this?");
+setTimeout(()=>speak("बच्चों, बताओ यह क्या है?","hi-IN"),1800);
+}
+
+function answer(){
+let v=data[list[index]];
+learned.add(list[index]);
+document.getElementById("learned").textContent=learned.size;
+document.getElementById("question").textContent=
+"🌟 Very Good! This is "+v[0]+". हिंदी में इसे "+v[1]+" कहते हैं।";
+speak("Very good! This is "+v[0]);
+setTimeout(()=>speak("हिंदी में इसे "+v[1]+" कहते हैं।","hi-IN"),1800);
+}
+
+function repeat(){
+let v=data[list[index]];
+speak(v[0]);
+setTimeout(()=>speak(v[1],"hi-IN"),1200);
+}
+
+function next(){
+index=(index+1)%list.length;
+render();ask();
+}
+function previous(){
+index=(index-1+list.length)%list.length;
+render();ask();
+}
+
+function categoriesBuild(){
+let cats=["All","Road","Rail","Air","Water","Work","Special"];
+let box=document.getElementById("categories");
+box.innerHTML="";
+cats.forEach(c=>{
+let b=document.createElement("button");
+b.textContent=c==="All"?"🌟 All":c;
+if(c===category)b.className="active";
+b.onclick=()=>{
+category=c;
+list=data.map((v,i)=>i).filter(i=>c==="All"||data[i][3]===c);
+index=0;
+categoriesBuild();render();
+};
+box.appendChild(b);
+});
+}
+
+function newQuiz(){
+let target=Math.floor(Math.random()*data.length);
+currentQuiz=data[target];
+document.getElementById("quizPicture").textContent=currentQuiz[2];
+let choices=[currentQuiz];
+while(choices.length<4){
+let x=data[Math.floor(Math.random()*data.length)];
+if(!choices.includes(x))choices.push(x);
+}
+choices.sort(()=>Math.random()-.5);
+let box=document.getElementById("options");
+box.innerHTML="";
+document.getElementById("feedback").textContent="";
+choices.forEach(v=>{
+let b=document.createElement("button");
+b.textContent=v[0];
+b.onclick=()=>{
+if(v===currentQuiz){
+stars++;
+document.getElementById("stars").textContent=stars;
+document.getElementById("feedback").textContent="🎉 Excellent! बिल्कुल सही!";
+speak("Excellent! Correct answer!");
+}else{
+document.getElementById("feedback").textContent="😊 Try again!";
+speak("Try again!");
+}
+};
+box.appendChild(b);
+});
+}
+
+categoriesBuild();
+render();
+newQuiz();
+</script>
+</body>
+</html>
